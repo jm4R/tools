@@ -21,7 +21,7 @@ struct first_type
  * T(Args&&... args);
  */
 template <typename T, typename... Args>
-using prefer_std_constructors = std::enable_if<sizeof...(Args) != 1 || !std::is_same<T, typename std::decay<typename first_type<Args...>::type>::type>::value>;
+using prefer_std_constructors = std::enable_if<sizeof...(Args) != 1 || !std::is_same<T, typename std::decay<decltype(std::get<0>(std::declval<std::tuple<Args..., void>>()))>::type>::value>;
 
 }  // namespace mj
 
